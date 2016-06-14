@@ -9,15 +9,25 @@ import com.google.api.services.youtube.model.*;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Using youtube Api to grab video data.
+ *
+ * @author Ceasar J.
+ * @version 1.0
+ */
+
 public class YoutubeSource implements Source<VideoModel> {
 
     private YouTube youtube;
     private Stack<List<VideoModel>> videos;
     private String query;
     private String pageToken;
-
     private final long MAX_ITEMS = 50;
 
+    /**
+     * Constructor.
+     * @param query (required) search youtube videos that matches the query.
+     */
     public YoutubeSource(String query){
         this.query = query;
         this.videos = new Stack<>();
@@ -51,14 +61,12 @@ public class YoutubeSource implements Source<VideoModel> {
                         .setPageToken(pageToken)
                         .setMaxResults(MAX_ITEMS);
 
-                // excecute request and get response
                 SearchListResponse response = search.execute();
 
-                // get token for the next page
                 pageToken = response.getNextPageToken();
 
-                // conver json response to a list
                 List<SearchResult> searchResultList = response.getItems();
+
                 Iterator<SearchResult> searchResultIterator = searchResultList.iterator();
 
                 List<VideoModel> vms = new ArrayList<>();
@@ -66,6 +74,8 @@ public class YoutubeSource implements Source<VideoModel> {
                 // iterate through all results
                 while (searchResultIterator.hasNext()) {
                     SearchResult video = searchResultIterator.next();
+
+                    //resource id needed to determine the type of search result
                     ResourceId rId = video.getId();
 
                     // check for only youtube videos
@@ -97,13 +107,13 @@ public class YoutubeSource implements Source<VideoModel> {
 
             // make request and get response
             VideoListResponse responseList = videos.execute();
+
             List<Video> resultsList = responseList.getItems();
 
-            if (resultsList != null && resultsList.size() > 0) {
-                // Only one item in the list because video is searched by ID.
-                Video video = resultsList.get(0);
-                videoStats =  video.getStatistics();
-            }
+            // Only one item in the list because video is searched by ID.
+            Video video = resultsList.get(0);
+
+            videoStats =  video.getStatistics();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,8 +122,8 @@ public class YoutubeSource implements Source<VideoModel> {
     }
 
     private VideoModel getVideoModel(SearchResult video,VideoStatistics stats) {
-        // set up the video model
         VideoModel vm = new VideoModel();
+
         vm.id = video.getId().getVideoId();
         vm.title = video.getSnippet().getTitle();
         vm.publishedDate = video.getSnippet().getPublishedAt().toString();
@@ -122,6 +132,7 @@ public class YoutubeSource implements Source<VideoModel> {
         vm.likeCount = stats.getLikeCount();
         vm.dislikeCount = stats.getDislikeCount();
         vm.word = query;
+
         return vm;
     }
 

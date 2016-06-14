@@ -21,10 +21,17 @@ public class VideoModel {
     public BigInteger commentCount;
     public BigInteger viewCount;
     public String word;
-    public List<List<CommentThread>> comments;
 
-    public VideoModel(){
-        comments = new ArrayList<>();
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Title: ")
+          .append(title)
+          .append("\n")
+          .append("ViewCount: ")
+          .append(viewCount);
+
+        return sb.toString();
     }
 
 }

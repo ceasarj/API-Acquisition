@@ -3,14 +3,11 @@ package acquisition;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.ResourceId;
-import com.google.api.services.youtube.model.SearchListResponse;
-import com.google.api.services.youtube.model.SearchResult;
+import com.google.api.services.youtube.model.*;
 
 import java.io.IOException;
 import java.util.*;
 
-import com.google.api.services.youtube.model.VideoStatistics;
 import model.VideoModel;
 
 public class YoutubeSource implements Source<VideoModel> {
@@ -35,7 +32,7 @@ public class YoutubeSource implements Source<VideoModel> {
 
     @Override
     public boolean hasNext() {
-        search();
+        searchVideo();
         return !videos.empty();
     }
 
@@ -44,7 +41,7 @@ public class YoutubeSource implements Source<VideoModel> {
         return videos.pop();
     }
 
-    private void search() {
+    private void searchVideo() {
         List<VideoModel> videoModels = new ArrayList<>();
             try {
                 // set up the search url
@@ -66,17 +63,21 @@ public class YoutubeSource implements Source<VideoModel> {
                 Iterator<SearchResult> searchResultIterator = searchResultList.iterator();
 
                 List<VideoModel> vms = new ArrayList<>();
+
                 // iterate through all results
                 while (searchResultIterator.hasNext()) {
                     SearchResult video = searchResultIterator.next();
                     ResourceId rId = video.getId();
 
                     // check for only youtube videos
+                    // some results can be channels etc..
                     if (rId.getKind().equals("youtube#video")) {
-                        videoModels.add(getVideoModel(video));
+                        VideoStatistics stats = getVideoStatistics(video.getId().getVideoId());
+                        videoModels.add(getVideoModel(video, stats));
                     }
                 }
 
+                // check if last page contains any videos from search results
                 if(videoModels.size() > 0)
                     videos.push(videoModels);
 
@@ -85,12 +86,42 @@ public class YoutubeSource implements Source<VideoModel> {
             }
     }
 
-    private VideoModel getVideoModel(SearchResult video) {
+    private VideoStatistics getVideoStatistics(String videoID){
+        VideoStatistics videoStats = null;
+
+        try {
+            // set parameters of request
+            YouTube.Videos.List videos = youtube.videos()
+                    .list("id,statistics")
+                    .setId(videoID)
+                    .setKey(System.getenv("YOUTUBE_KEY"));
+
+            // make request and get response
+            VideoListResponse responseList = videos.execute();
+            List<Video> resultsList = responseList.getItems();
+
+            if (resultsList != null && resultsList.size() > 0) {
+                // Only one item in the list because video is searched by ID.
+                Video video = resultsList.get(0);
+                videoStats =  video.getStatistics();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return videoStats;
+    }
+
+    private VideoModel getVideoModel(SearchResult video,VideoStatistics stats) {
         // set up the video model
         VideoModel vm = new VideoModel();
         vm.id = video.getId().getVideoId();
         vm.title = video.getSnippet().getTitle();
         vm.publishedDate = video.getSnippet().getPublishedAt().toString();
+        vm.commentCount = stats.getCommentCount();
+        vm.viewCount = stats.getViewCount();
+        vm.likeCount = stats.getLikeCount();
+        vm.dislikeCount = stats.getDislikeCount();
         vm.word = query;
         return vm;
     }
@@ -99,7 +130,7 @@ public class YoutubeSource implements Source<VideoModel> {
         YoutubeSource ys = new YoutubeSource("Batman");
         while(ys.hasNext()){
             ArrayList<VideoModel> vm = (ArrayList)ys.next();
-            System.out.println(vm.get(0).title);
+            System.out.println(vm.get(0));
         }
     }
 }

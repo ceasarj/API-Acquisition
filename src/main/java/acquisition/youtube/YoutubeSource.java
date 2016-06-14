@@ -52,47 +52,47 @@ public class YoutubeSource implements Source<VideoModel> {
 
     private void searchVideo() {
         List<VideoModel> videoModels = new ArrayList<>();
-            try {
-                // set up the search url
-                YouTube.Search.List search = youtube.search()
-                        .list("id,snippet")
-                        .setKey(System.getenv("YOUTUBE_KEY"))
-                        .setQ(query)
-                        .setPageToken(pageToken)
-                        .setMaxResults(MAX_ITEMS);
+        try {
+            // set up the search url
+            YouTube.Search.List search = youtube.search()
+                    .list("id,snippet")
+                    .setKey(System.getenv("YOUTUBE_KEY"))
+                    .setQ(query)
+                    .setPageToken(pageToken)
+                    .setMaxResults(MAX_ITEMS);
 
-                SearchListResponse response = search.execute();
+            SearchListResponse response = search.execute();
 
-                pageToken = response.getNextPageToken();
+            pageToken = response.getNextPageToken();
 
-                List<SearchResult> searchResultList = response.getItems();
+            List<SearchResult> searchResultList = response.getItems();
 
-                Iterator<SearchResult> searchResultIterator = searchResultList.iterator();
+            Iterator<SearchResult> searchResultIterator = searchResultList.iterator();
 
-                List<VideoModel> vms = new ArrayList<>();
+            List<VideoModel> vms = new ArrayList<>();
 
-                // iterate through all results
-                while (searchResultIterator.hasNext()) {
-                    SearchResult video = searchResultIterator.next();
+            // iterate through all results
+            while (searchResultIterator.hasNext()) {
+                SearchResult video = searchResultIterator.next();
 
-                    //resource id needed to determine the type of search result
-                    ResourceId rId = video.getId();
+                //resource id needed to determine the type of search result
+                ResourceId rId = video.getId();
 
-                    // check for only youtube videos
-                    // some results can be channels etc..
-                    if (rId.getKind().equals("youtube#video")) {
-                        VideoStatistics stats = getVideoStatistics(video.getId().getVideoId());
-                        videoModels.add(getVideoModel(video, stats));
-                    }
+                // check for only youtube videos
+                // some results can be channels etc..
+                if (rId.getKind().equals("youtube#video")) {
+                    VideoStatistics stats = getVideoStatistics(video.getId().getVideoId());
+                    videoModels.add(getVideoModel(video, stats));
                 }
-
-                // check if last page contains any videos from search results
-                if(videoModels.size() > 0)
-                    videos.push(videoModels);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
+            // check if last page contains any videos from search results
+            if(videoModels.size() > 0)
+                videos.push(videoModels);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private VideoStatistics getVideoStatistics(String videoID){

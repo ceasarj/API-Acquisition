@@ -1,4 +1,4 @@
-package model;
+package acquisition.youtube;
 
 import com.google.api.services.youtube.model.CommentThread;
 

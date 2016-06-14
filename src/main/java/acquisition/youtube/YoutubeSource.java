@@ -1,5 +1,6 @@
-package acquisition;
+package acquisition.youtube;
 
+import acquisition.Source;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
@@ -7,8 +8,6 @@ import com.google.api.services.youtube.model.*;
 
 import java.io.IOException;
 import java.util.*;
-
-import model.VideoModel;
 
 public class YoutubeSource implements Source<VideoModel> {
 

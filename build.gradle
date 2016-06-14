@@ -49,5 +49,5 @@ dependencies {
 task acquireYoutubeVideo(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 
-    main = 'acquisition.YOutubeSource'
+    main = 'acquisition.youtube.YoutubeCollectorApp'
 }

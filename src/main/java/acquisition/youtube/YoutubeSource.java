@@ -125,11 +125,4 @@ public class YoutubeSource implements Source<VideoModel> {
         return vm;
     }
 
-    public static void main(String[] args){
-        YoutubeSource ys = new YoutubeSource("Batman");
-        while(ys.hasNext()){
-            ArrayList<VideoModel> vm = (ArrayList)ys.next();
-            System.out.println(vm.get(0));
-        }
-    }
 }

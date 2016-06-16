@@ -11,16 +11,81 @@ import java.util.List;
  */
 public class VideoModel {
     // snippets
-    public String id;
-    public String title;
-    public String publishedDate;
+    private String id;
+    private String title;
+    private String publishedDate;
 
     // Statistics
-    public BigInteger dislikeCount;
-    public BigInteger likeCount;
-    public BigInteger commentCount;
-    public BigInteger viewCount;
-    public String word;
+    private BigInteger dislikeCount;
+    private BigInteger likeCount;
+    private BigInteger commentCount;
+    private BigInteger viewCount;
+    private String query;
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public void setDislikeCount(BigInteger dislikeCount) {
+        this.dislikeCount = dislikeCount;
+    }
+
+    public void setLikeCount(BigInteger likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public void setCommentCount(BigInteger commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public void setViewCount(BigInteger viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public BigInteger getDislikeCount() {
+        return dislikeCount;
+    }
+
+    public BigInteger getLikeCount() {
+        return likeCount;
+    }
+
+    public BigInteger getCommentCount() {
+        return commentCount;
+    }
+
+    public BigInteger getViewCount() {
+        return viewCount;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public String getId() {
+
+        return id;
+    }
 
     @Override
     public String toString(){
@@ -30,6 +95,7 @@ public class VideoModel {
           .append("\n")
           .append("ViewCount: ")
           .append(viewCount);
+
 
         return sb.toString();
     }

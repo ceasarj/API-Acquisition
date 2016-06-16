@@ -51,7 +51,9 @@ public class YoutubeSource implements Source<VideoModel> {
     }
 
     private void searchVideo() {
+        // list of videos in the current page
         List<VideoModel> videoModels = new ArrayList<>();
+
         try {
             // set up the search url
             YouTube.Search.List search = youtube.search()
@@ -61,15 +63,12 @@ public class YoutubeSource implements Source<VideoModel> {
                     .setPageToken(pageToken)
                     .setMaxResults(MAX_ITEMS);
 
+
             SearchListResponse response = search.execute();
 
             pageToken = response.getNextPageToken();
 
-            List<SearchResult> searchResultList = response.getItems();
-
-            Iterator<SearchResult> searchResultIterator = searchResultList.iterator();
-
-            List<VideoModel> vms = new ArrayList<>();
+            Iterator<SearchResult> searchResultIterator = response.getItems().iterator();
 
             // iterate through all results
             while (searchResultIterator.hasNext()) {
@@ -124,14 +123,14 @@ public class YoutubeSource implements Source<VideoModel> {
     private VideoModel getVideoModel(SearchResult video,VideoStatistics stats) {
         VideoModel vm = new VideoModel();
 
-        vm.id = video.getId().getVideoId();
-        vm.title = video.getSnippet().getTitle();
-        vm.publishedDate = video.getSnippet().getPublishedAt().toString();
-        vm.commentCount = stats.getCommentCount();
-        vm.viewCount = stats.getViewCount();
-        vm.likeCount = stats.getLikeCount();
-        vm.dislikeCount = stats.getDislikeCount();
-        vm.word = query;
+        vm.setId(video.getId().getVideoId());
+        vm.setTitle(video.getSnippet().getTitle());
+        vm.setPublishedDate(video.getSnippet().getPublishedAt().toString());
+        vm.setCommentCount(stats.getCommentCount());
+        vm.setViewCount(stats.getViewCount());
+        vm.setLikeCount(stats.getLikeCount());
+        vm.setDislikeCount(stats.getDislikeCount());
+        vm.setQuery(query);
 
         return vm;
     }

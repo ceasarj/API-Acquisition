@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8be5de2a-98e8-445a-b2fe-940534afd675" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mysqlScripts/video.sql" afterPath="$PROJECT_DIR$/mysqlScripts/video.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java" afterPath="$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java" />
     </list>
     <ignored path="data-science.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,19 +50,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Library.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Library.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding>
-                <element signature="e#268#269#0" expanded="false" />
-                <element signature="e#295#296#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
@@ -100,7 +87,7 @@
       <file leaf-file-name="YoutubeSource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
+            <state relative-caret-position="1864">
               <caret line="132" column="19" selection-start-line="132" selection-start-column="19" selection-end-line="132" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -122,8 +109,8 @@
       <file leaf-file-name="YoutubeCollector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+            <state relative-caret-position="-603">
+              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,7 +118,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="video.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="travis.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="video.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysqlScripts/video.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -536,8 +533,9 @@
         <option value="$PROJECT_DIR$/src/main/java/acquisition/Collector.java" />
         <option value="$PROJECT_DIR$/src/main/java/acquisition/youtube/VideoModel.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java" />
         <option value="$PROJECT_DIR$/mysqlScripts/video.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java" />
+        <option value="$PROJECT_DIR$/travis.yml" />
       </list>
     </option>
   </component>
@@ -1327,9 +1325,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mysqlScripts/video.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
+        <state relative-caret-position="1864">
           <caret line="132" column="19" selection-start-line="132" selection-start-column="19" selection-end-line="132" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1339,18 +1345,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/acquisition/youtube/YoutubeCollector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+        <state relative-caret-position="-603">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysqlScripts/video.sql">
+    <entry file="file://$PROJECT_DIR$/travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+        <state relative-caret-position="102">
+          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
           <folding />
         </state>
       </provider>

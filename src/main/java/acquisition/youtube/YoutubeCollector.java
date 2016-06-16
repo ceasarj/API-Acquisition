@@ -2,7 +2,6 @@ package acquisition.youtube;
 
 import acquisition.Collector;
 
-import javax.servlet.ServletException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by ceejay562 on 6/15/2016.
+ * Store youtube data into mysql db
+ *
  */
 public class YoutubeCollector implements Collector<VideoModel, VideoModel> {
 

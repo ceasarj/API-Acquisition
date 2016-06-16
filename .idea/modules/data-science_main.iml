@@ -13,6 +13,7 @@
     <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-youtube:v3-rev166-1.21.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.gdata:core:1.47.1" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.21.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:13.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-jetty:1.11.0-beta" level="project" />

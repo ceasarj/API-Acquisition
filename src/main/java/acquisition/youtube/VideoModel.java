@@ -87,17 +87,14 @@ public class VideoModel {
         return id;
     }
 
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Title: ")
-          .append(title)
-          .append("\n")
-          .append("ViewCount: ")
-          .append(viewCount);
-
-
-        return sb.toString();
+    public boolean isDirty(){
+        return id == null ||
+                title == null ||
+                publishedDate == null ||
+                likeCount == null ||
+                dislikeCount == null ||
+                commentCount == null ||
+                viewCount == null;
     }
 
 }

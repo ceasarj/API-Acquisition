@@ -50,21 +50,29 @@ public class YoutubeCollector implements Collector<VideoModel, VideoModel> {
             con = DriverManager.getConnection(user, pass, url);
 
             PreparedStatement psmt = con.prepareStatement(query);
-
+            Statement stm = con.createStatement();
             Iterator<VideoModel> it = data.iterator();
 
             while(it.hasNext()){
                 VideoModel vm = it.next();
 
-                psmt.setString(0, vm.getId());
-                psmt.setString(1,vm.getTitle());
-                psmt.setString(2, vm.getPublishedDate());
-                psmt.setInt(3, vm.getViewCount().intValue());
-                psmt.setInt(4, vm.getLikeCount().intValue());
-                psmt.setInt(5, vm.getDislikeCount().intValue());
-                psmt.setInt(5, vm.getCommentCount().intValue());
+                String selectVideo = "SELECT video_id FROM video_data WHERE video_id =" + vm.getId();
 
-                psmt.executeUpdate();
+                ResultSet set = stm.executeQuery(selectVideo);
+
+                // check if this video is already stored in the db
+                if(!set.next()) {
+
+                    psmt.setString(0, vm.getId());
+                    psmt.setString(1, vm.getTitle());
+                    psmt.setString(2, vm.getPublishedDate());
+                    psmt.setInt(3, vm.getViewCount().intValue());
+                    psmt.setInt(4, vm.getLikeCount().intValue());
+                    psmt.setInt(5, vm.getDislikeCount().intValue());
+                    psmt.setInt(5, vm.getCommentCount().intValue());
+
+                    psmt.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
